@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-yl86^a6v*rf)+t3qkmj*@@zc%qn@t&kjx2jc_*qzvm2olst#&n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -73,10 +73,15 @@ WSGI_APPLICATION = 'nutella.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "nutella",
+        "USER": "nutuser",
+        "PASSWORD": "nut77ella25",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
     }
 }
 
