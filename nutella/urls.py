@@ -22,6 +22,7 @@ class Home(TemplateView):
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
     path("", Home.as_view(), name="home"),
+    path("login/", include("login.urls")),
+    path("registration/", registration, name="registration"),
 ]
