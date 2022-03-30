@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+</ul>
+{% endif %}
+
+
+{% if not user.is_authenticated %}
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <div class="form-elem">
+        <div>Adresse email ou nom d'utilisateur :</div>
+        <input type="text" id="email-or-username" name="email-or-username" />
+    </div>
+    <div class="form-elem">
+        <div>Mot de passe :</div>
+        <input type="text" name="password" />
+    </div>
+    <div class="form-elem">
+        <input class="logBtn" type="submit" value="Login" />
+    </div>
+</form>
+
+
+
+{% else %}
+<button class="logBtn logBtn__logout">
+    <a href="{% url 'logout' %}">Logout</a>
+</button>
+{% endif %} {% if user.is_authenticated %}
+<p class="welcome">Bienvenue, {{ user.get_username }}. Merci de vous être connecté(e).</p>
+{% else %}
+<p class="welcome">Bienvenue, connectez-vous.</p>
+{% endif %}
+
+<p>
+    Pas de compte ? Vous pouvez en créer un <a href="{% url 'registration' %}">ici</a> !
+</p>
+
+{% endblock %}
