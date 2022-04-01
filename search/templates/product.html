@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+
+<p>
+<table class="theproduct">
+    <tr>
+        <td><img src="{{product.image}}"></td>
+        <td>{{product.name}}</td>
+    </tr>
+</table>
+</p>
+<p>
+<table class="infoprod">
+    <tr>
+        <td>
+            Nutriscore <br>
+            {{product.nutriscore}}
+        </td>
+        <td>
+            Repères nutritionnels pour 100g <br>
+            <a href="{{product.nutrition}}"><img src="{{product.nutrition}}"></a>
+        </td>
+    </tr>
+</table>
+<br>
+Voir sur <a href="{{product.url}}">OpenFoodFacts</a>
+
+</p>
+
+{% for product in substitutes %}
+<p>
+<table>
+    <tr>
+        <td>
+
+            <form method="GET" action={% url 'favorite' product.id %}>
+                <div class="box">
+                    {% csrf_token %}
+                    <div>
+                        <img src="{{product.image}}"><br>
+                        {{product.name}}
+                        {{product.nutriscore}}<br>
+                        <input type="submit" value="SAUVEGARDER">
+                    </div>
+
+                </div>
+            </form>
+        </td>
+
+    </tr>
+</table>
+
+</p>
+{% endfor %}
+
+
+{% endblock %}
+
+{% block history %}
+{% endblock %}
+
+{% block contact %}
+{% endblock %}
