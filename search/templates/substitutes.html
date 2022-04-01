@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<p>
+    Substituts disponibles :
+</p>
+{% for product in substitutes %}
+<p>
+    <img src="{{product.image}}"> <br>
+    {{product.name}} <br>
+    {{product.nutriscore}}
+</p>
+{% endfor %}
+{% endblock %}
