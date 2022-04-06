@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-yl86^a6v*rf)+t3qkmj*@@zc%qn@t&kjx2jc_*qzvm2olst#&n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "nutellaapp.herokuapp.com/*"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "nutellaapp.herokuapp.com/"]
  
 
 # Application definition
