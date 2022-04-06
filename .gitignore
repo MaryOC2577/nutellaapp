@@ -325,7 +325,7 @@ __pycache__/
 # Telerik's JustMock configuration file
 *.jmconfig
 
-# BizTalk build output
+# BizTalk output
 *.btp.cs
 *.btm.cs
 *.odx.cs
@@ -357,3 +357,6 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Database
+.sqlite3
