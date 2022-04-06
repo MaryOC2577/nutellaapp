@@ -12,7 +12,7 @@ class ProductResult(ListView):
     def get_queryset(self):
         expression = self.request.GET.get("expression", "").title()
         print("expression :", expression)
-        return Product.objects.filter(name__contains=expression) if expression else []
+        return Product.objects.filter(name__contains=expression).order_by("id") if expression else []
 
     def get_context_data(self, **kwargs):
         kwargs["expression"] = self.request.GET.get("expression", "")
