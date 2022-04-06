@@ -25,7 +25,6 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-yl86^a6v*rf)+t
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "nutellaapp.herokuapp.com"]
  
 
@@ -93,7 +92,7 @@ DATABASES = {
     }
 }
 
-# DATABASE_URL = os.environ['DATABASE_URL']
+DATABASE_URL = os.environ.get('DATABASE_URL', 'postgres://kidjjfbudetcwj:dc4065daedab2055bd7690188d5aca0665f8c0a10d75ec7ca9b74c8ddfe75d3d@ec2-52-48-159-67.eu-west-1.compute.amazonaws.com:5432/d98fgo2j24gsbr')
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
