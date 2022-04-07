@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import os
+import django_heroku
 import psycopg2
 from pathlib import Path
 
@@ -147,3 +148,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTH_USER_MODEL = "login.User"  # cette variable pointe sur le modèle User à utiliser
+
+django_heroku.settings(locals())
