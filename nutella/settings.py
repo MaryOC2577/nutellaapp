@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import os
-
+import dj_database_url
 import psycopg2
 from pathlib import Path
 
@@ -94,9 +94,11 @@ WSGI_APPLICATION = 'nutella.wsgi.application'
 #     }
 # }
 
-DATABASE_URL = os.getenv('DATABASE_URL')
+# DATABASE_URL = os.getenv('DATABASE_URL')
 
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+DATABASES = {'default': dj_database_url.parse(os.getenv('DATABASE_URL'))}
+
+# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
