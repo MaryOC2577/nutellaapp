@@ -2,7 +2,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-from django.views.generic import View
+from django.views.generic import View, DetailView
 from login.models import User
 
 
