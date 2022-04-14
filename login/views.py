@@ -56,3 +56,13 @@ def registration(request):
         return HttpResponse(f"Bienvenue {username} !")
 
     return render(request, "registration.html")
+
+
+class MyAccount(DetailView):
+    template_name = "account.html"
+    model = User
+    context_object_name = "login.user"
+
+    def get_context_data(self, **kwargs):
+        kwargs["user"] = self.get_object()
+        return super().get_context_data(**kwargs)
