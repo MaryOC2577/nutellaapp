@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class ShowFavorites(LoginRequiredMixin, ListView):
-    template_name = "favorite/favorites.html"
+    template_name = "favorites.html"
     model = Favorite
     context_object_name = "favorites"
 

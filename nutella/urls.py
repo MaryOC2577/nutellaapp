@@ -27,5 +27,5 @@ urlpatterns = [
     path("login/", include("login.urls")),
     path("registration/", registration, name="registration"),
     path("search/", include("search.urls")),
-    path("favorites/", include("favorite.urls", namespace="favorite")),
+    path("favorites/", include("favorite.urls"))
 ]
