@@ -2,7 +2,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-from django.views.generic import View, DetailView
+from django.views.generic import View, TemplateView
 from login.models import User
 
 
@@ -24,8 +24,8 @@ class LoginView(View):
         if user is not None:
             login(request, user)
             messages.add_message(request, messages.SUCCESS, "Vous êtes connecté !")
-            return redirect("home")
-
+            return redirect("account")
+        
         else:
             messages.add_message(
                 request, messages.ERROR, "Les champs renseignés sont invalides."
@@ -58,11 +58,10 @@ def registration(request):
     return render(request, "registration.html")
 
 
-class MyAccount(DetailView):
+class MyAccount(TemplateView):
     template_name = "account.html"
-    model = User
-    context_object_name = "login.user"
 
     def get_context_data(self, **kwargs):
-        kwargs["user"] = self.get_object()
-        return super().get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.request.user
+        return context

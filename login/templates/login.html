@@ -25,7 +25,9 @@
         <input class="logBtn" type="submit" value="Login" />
     </div>
 </form>
-
+<p>
+    Pas de compte ? Vous pouvez en créer un ici<a href="{% url 'registration' %}">ici</a> !
+</p>
 
 
 {% else %}
@@ -38,8 +40,6 @@
 <p class="welcome">Bienvenue, connectez-vous.</p>
 {% endif %}
 
-<p>
-    Pas de compte ? Vous pouvez en créer un ici<a href="{% url 'registration' %}">ici</a> !
-</p>
+
 
 {% endblock %}

@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-yl86^a6v*rf)+t3qkmj*@@zc%qn@t&kjx2jc_*qzvm2olst#&n')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "nutellaapp.herokuapp.com"]
  
 
