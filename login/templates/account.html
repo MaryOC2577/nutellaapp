@@ -1,14 +1,10 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<p class="messages">
-    {{user.name}}
+<p>
+    {{user.username}} <br>
+    {{user.email}}
 </p>
 {% endblock %}
 
 
-{% block history %}
-<p class="messages">
-    {{user.name}}
-</p>
-{% endblock %}
