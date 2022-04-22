@@ -17,8 +17,8 @@ class ShowFavorites(LoginRequiredMixin, ListView):
 
 
 class DeleteFavorites(View):
-    def post(self, request, favorite_id):
-        favorite = Favorite.objects.get(pk=favorite_id)
+    def post(self, request, pk):
+        favorite = Favorite.objects.get(pk=pk)
         if self.request.user.id == favorite.user.id:
             favorite.delete()
-        return redirect("favorites")
+        return redirect("favorite:favorites")

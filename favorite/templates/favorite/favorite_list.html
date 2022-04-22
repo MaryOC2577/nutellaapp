@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 
 {% block head %}
+
 {% for favorite in favorites %}
 <p>
-<form method="GET" action="{% url 'favorites' favorite.id %}"></form>
+<form method="get" action="{% url 'favorite:favorites' %}"></form>
 <a href="{% url 'oneproduct' favorite.product.id %}"> {{favorite.product.name}}</a>
-<input type="submit" value="SUPPRIMER">
-</form>
-</p>
+<form method="post" action="{% url 'favorite:delete' favorite.id %}">
+{% csrf_token %}
+<input type="submit" value="SUPPRIMER"></form>
 {% endfor %}
+</p>
 {% endblock %}
