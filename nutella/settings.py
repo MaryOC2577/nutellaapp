@@ -147,3 +147,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = "login.User"  # cette variable pointe sur le modèle User à utiliser
 
 # django_heroku.settings(locals())
+
+# LOGIN_REDIRECT_URL = reverse_lazy('account')
+# LOGIN_URL = reverse_lazy('login')
+# LOGOUT_REDIRECT_URL = reverse_lazy('logout')

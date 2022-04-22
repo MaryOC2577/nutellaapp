@@ -5,5 +5,5 @@ from . import views
 app_name = "favorite"
 
 urlpatterns = [
-    path("", views.ShowFavorites.as_view(), name="myfavorites"),
+    path("", views.ShowFavorites.as_view(), name="favorites"),
 ]

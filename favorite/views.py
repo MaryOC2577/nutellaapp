@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class ShowFavorites(LoginRequiredMixin, ListView):
-    template_name = "favorites.html"
+    template_name = "favorite/favorite_list.html"
     model = Favorite
     context_object_name = "favorites"
 
@@ -21,4 +21,4 @@ class DeleteFavorites(View):
         favorite = Favorite.objects.get(pk=favorite_id)
         if self.request.user.id == favorite.user.id:
             favorite.delete()
-        return redirect("myfavorites")
+        return redirect("favorites")
