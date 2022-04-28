@@ -2,50 +2,48 @@ import pytest
 from django.urls import reverse, resolve
 
 def test_home():
-    assert path == ""
+    path = reverse("home")
     assert resolve(path).view_name == "home"
 
 def test_login():
-    assert path == "login/"
+    path = reverse("login")
     assert resolve(path).view_name == "login"
 
 def test_logout():
-    assert path == "logout/"
+    path = reverse("logout")
     assert resolve(path).view_name == "logout"
 
 def test_account():
-    assert path == "account/"
+    path = reverse("account")
     assert resolve(path).view_name == "account"
 
 def test_registration():
-    assert path == "registration/"
+    path = reverse("registration")
     assert resolve(path).view_name == "registration"
 
 def test_search():
-    assert path == "search/"
-    assert resolve(path).view_name == "searh"
+    path = reverse("search")
+    assert resolve(path).view_name == "search"
 
 def test_result():
-    assert path == "result/"
+    path = reverse("result")
     assert resolve(path).view_name == "result"
 
 def test_oneproduct():
-    assert path == "oneproduct/<int:pk>/"
+    path = reverse("oneproduct", kwargs={'pk':1})
+    path == "search/oneproduct/1/"
     assert resolve(path).view_name == "oneproduct"
 
-def test_substitutes():
-    assert path == "substitutes/<int:pk>/"
-    assert resolve(path).view_name == "substitutes"
+# def test_substitutes():
+#     path = reverse("substitutes", kwargs={'pk':1)
+#     path ==""
+#     assert resolve(path).view_name == "substitutes"
 
 def test_favorites():
-    assert path == "favorites/"
-    assert resolve(path).view_name == "favorite"
-
-def test_save_favorite():
-    assert path == "savefavorite/<int:pk>/"
+    path = reverse("favorite")
     assert resolve(path).view_name == "favorite"
 
 def test_delete_favorite():
-    assert path == "delete/<int:pk>/"
+    path = reverse("delete")
     assert resolve(path).view_name == "delete"
 
