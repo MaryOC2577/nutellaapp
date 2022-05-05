@@ -1,49 +1,47 @@
-import pytest
-from django.urls import reverse, resolve
+from django.test import Client
 
-def test_home():
-    path = reverse("home")
-    assert resolve(path).view_name == "home"
+class TestUrls():
 
-def test_login():
-    path = reverse("login")
-    assert resolve(path).view_name == "login"
+    def setUp(self):
+        self.client = Client()
+    
+    def test_home():
+        response = self.client.get('home/')
+        self.assertEqual(response.status_code, 200)
+    
+    def test_login():
+        response = self.client.get('login/')
+        self.assertEqual(response.status_code, 200)
 
-def test_logout():
-    path = reverse("logout")
-    assert resolve(path).view_name == "logout"
+    def test_logout():
+        response = self.client.get('logout/')
+        self.assertEqual(response.status_code, 200)
 
-def test_account():
-    path = reverse("account")
-    assert resolve(path).view_name == "account"
+    def test_registration():
+        response = self.client.get('registration/')
+        self.assertEqual(response.status_code, 200)
 
-def test_registration():
-    path = reverse("registration")
-    assert resolve(path).view_name == "registration"
+    def test_search():
+        response = self.client.get('search/')
+        self.assertEqual(response.status_code, 200)
 
-def test_search():
-    path = reverse("search")
-    assert resolve(path).view_name == "search"
+    def test_result():
+        response = self.client.get('result/')
+        self.assertEqual(response.status_code, 200)
 
-def test_result():
-    path = reverse("result")
-    assert resolve(path).view_name == "result"
+    def test_oneproduct():
+        response = self.client.get('oneproduct/', kwargs={'pk':1})
+        self.assertEqual(response.status_code, 200)
 
-def test_oneproduct():
-    path = reverse("oneproduct", kwargs={'pk':1})
-    path == "search/oneproduct/1/"
-    assert resolve(path).view_name == "oneproduct"
+    def test_substitutes():
+        response = self.client.get('substitutes/', kwargs={'pk':1})
+        self.assertEqual(response.status_code, 200)
 
-# def test_substitutes():
-#     path = reverse("substitutes", kwargs={'pk':1)
-#     path ==""
-#     assert resolve(path).view_name == "substitutes"
+    def test_favorites():
+        response = self.client.get('favorites/')
+        self.assertEqual(response.status_code, 200)
 
-def test_favorites():
-    path = reverse("favorite")
-    assert resolve(path).view_name == "favorite"
-
-def test_delete_favorite():
-    path = reverse("delete")
-    assert resolve(path).view_name == "delete"
-
+    def test_delete_favorite():
+        response = self.client.get('delete/', kwargs={'pk':1})
+        self.assertEqual(response.status_code, 200)
+    
