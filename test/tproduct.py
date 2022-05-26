@@ -12,10 +12,10 @@ def create_products():
         {name:"pizza_6", stores:"super u", nutriscore:"A"},
     }
     return tproducts
-
+d
 @pytest.mark.django_db
 def test_substitutes():
     # product = Product.objects.get(pk=1)
     # product = create_products().objects.get(pk=1)
-    product = Product().objects.get(pk=1) in create_products()
-    assert (len(product.get_six_better_substitutes()) == 6) in create_products()
+    product = Product.objects.first()
+    assert (len(product.get_six_better_substitutes()) == 6)
