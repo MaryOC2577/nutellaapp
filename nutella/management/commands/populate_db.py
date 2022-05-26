@@ -24,15 +24,17 @@ class Command(BaseCommand):
         product_list = response.json()
 
         for product_data in product_list["products"]:
-            categories = []
+            # categories = []
             # category_list = product_data["categories"].replace(", ", ",").split(",")
 
             product = product_list["products"]
 
             # for cat_name in category_list:
+            
             cat = Category.objects.get_or_create(name=category_name)
             cat.save()
-            categories.append(cat)
+            # cat.save()
+            # categories.append(cat)
 
             if not product_data["categories_lc"] == "fr":
                 continue
@@ -48,6 +50,7 @@ class Command(BaseCommand):
                 url=product_data["url"],
                 image=product_data["image_url"],
                 nutrition=product_data["image_nutrition_url"],
+                categories=Category.objects.get(id, name=category_name)
             )
 
             product.save()
