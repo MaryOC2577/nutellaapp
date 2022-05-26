@@ -25,14 +25,14 @@ class Command(BaseCommand):
 
         for product_data in product_list["products"]:
             categories = []
-            category_list = product_data["categories"].replace(", ", ",").split(",")
+            # category_list = product_data["categories"].replace(", ", ",").split(",")
 
             product = product_list["products"]
 
-            for cat_name in category_list:
-                cat = Category.objects.get_or_create(name=cat_name)[0]
-                cat.save()
-                categories.append(cat)
+            # for cat_name in category_list:
+            cat = Category.objects.get_or_create(name=category_name)
+            cat.save()
+            categories.append(cat)
 
             if not product_data["categories_lc"] == "fr":
                 continue

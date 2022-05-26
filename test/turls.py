@@ -3,7 +3,7 @@ from django.test import Client
 
 class TestUrls():
 
-    def set_up(self):
+    def setUp(self):
         self.client = Client()
     
     def test_home(self):
