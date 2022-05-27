@@ -13,49 +13,31 @@ class Command(BaseCommand):
         parser.add_argument("category", nargs="+", type=str)
 
     def handle(self, *args, **options):
-        category_name = options["category"]
+        category_name = options["category"][0]
+        
         response = requests.get(
-            f"https://fr.openfoodfacts.org/cgi/search.pl?search_terms={category_name}&search_simple=1&action=process&json=1&page=1&page_size=2000"
+            f"https://fr.openfoodfacts.org/cgi/search.pl?search_terms={category_name}&search_simple=1&action=process&json=1&page={page}&page_size={page_size}"
         )
 
-        product_list = []
-
-        nb_products = 20
         product_list = response.json()
 
+        cat, created = Category.objects.get_or_create(name=category_name)
+
         for product_data in product_list["products"]:
-            # categories = []
-            # category_list = product_data["categories"].replace(", ", ",").split(",")
-
-            product = product_list["products"]
-
-            # for cat_name in category_list:
-            
-            cat = Category.objects.get_or_create(name=category_name)
-            cat.save()
-            # cat.save()
-            # categories.append(cat)
-
-            if not product_data["categories_lc"] == "fr":
+            if not self.check_product_data(product_data):
                 continue
-
-            # for product in products:
-            #     if product["name"] == product_data["product_name_fr"]:
-            #         continue
-            #     else:
-            product = Product(
+       
+            product = Product.objects.update_or_create(
                 name=product_data["product_name_fr"],
                 stores=product_data["stores"],
                 nutriscore=(product_data["nutrition_grade_fr"]).upper(),
                 url=product_data["url"],
                 image=product_data["image_url"],
                 nutrition=product_data["image_nutrition_url"],
-                categories=Category.objects.get(id, name=category_name)
+                category=cat
             )
 
-            product.save()
-            product.categories.add(*[cat.id for cat in categories])
-            product.save()
+            
 
             print(
                 "Nom du produit : ",
@@ -70,3 +52,14 @@ class Command(BaseCommand):
                 product_data["url"],
                 "\n",
             )
+
+    def check_product_data(self, product_data):
+        if not "categories_lc" in product_data: 
+            return False
+        if product_data["categories_lc"] != "fr":
+            return False
+        if not "image_nutrition_url" in product_data:
+            return False
+        if not "stores" in product_data:
+            return False
+        return True

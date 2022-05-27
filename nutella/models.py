@@ -15,7 +15,7 @@ class Product(models.Model):
     url = models.CharField(max_length=300)
     image = models.URLField(default="")
     nutrition = models.URLField(default="")
-    categories = models.ForeignKey(Category, on_delete=models.PROTECT)
+    category = models.ForeignKey(to=Category, on_delete=models.CASCADE)
 
     def get_six_better_substitutes(self):
 
