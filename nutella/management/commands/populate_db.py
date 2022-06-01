@@ -11,9 +11,13 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument("category", nargs="+", type=str)
+        parser.add_argument("page", nargs="+", type=int)
+        parser.add_argument("page_size", nargs="+", type=int)
 
     def handle(self, *args, **options):
         category_name = options["category"][0]
+        page = options["page"]
+        page_size = options["page_size"]
         
         response = requests.get(
             f"https://fr.openfoodfacts.org/cgi/search.pl?search_terms={category_name}&search_simple=1&action=process&json=1&page={page}&page_size={page_size}"
@@ -30,11 +34,12 @@ class Command(BaseCommand):
             product = Product.objects.update_or_create(
                 name=product_data["product_name_fr"],
                 stores=product_data["stores"],
-                nutriscore=(product_data["nutrition_grade_fr"]).upper(),
+                nutriscore=product_data["nutrition_grade_fr"].upper(),
                 url=product_data["url"],
                 image=product_data["image_url"],
                 nutrition=product_data["image_nutrition_url"],
                 category=cat
+
             )
 
             

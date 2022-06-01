@@ -28,7 +28,7 @@ class Product(models.Model):
         # retourner les 6 produits avec le meilleur nutriscore possible
         six_better_products = (
             Product.objects.filter(
-                categories=[category.id for category in self.categories.all()][0]
+                category=[category.id for category in self.categories.all()][0]
             )
             .filter(Q(nutriscore=grade))
             .exclude(id__in=unavaillable_substitutes)
