@@ -1,3 +1,20 @@
 [run]
-source = "/test"
-omit = login
+include =
+    ./*
+omit =
+    *test/*
+    */manage.py
+    */urls.py
+    */__init__.py
+    */migrations/*
+    */admin.py
+    */tests.py
+    */wsgi.py
+    */apps.py
+    */settings.py
+    */test_settings.py
+    */asgi.py
+    conftest.py
+
+[html]
+directory = coverage_html_report
