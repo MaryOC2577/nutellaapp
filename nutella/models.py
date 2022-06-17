@@ -23,24 +23,12 @@ class Product(models.Model):
             set([favorite.product.id for favorite in Favorite.objects.all()])
         )
 
-        # récupérer le nutriscore du produit choisit par l'utilisateur
-        grade = self.nutriscore
         # retourner les 6 produits avec le meilleur nutriscore possible
-        six_better_products = (
-            Product.objects.filter(
-                category=[category.id for category in self.categories.all()][0]
-            )
-            .filter(Q(nutriscore=grade))
-            .exclude(id__in=unavaillable_substitutes)
-            .order_by("nutriscore")[:5]
-        )
-        for element in six_better_products:
-            print("test :", element.name)
-        else:
-            print("Pas de substitut disponible.")
-        return six_better_products
+        return Product.objects.filter(category=self.category, nutriscore__lte=self.nutriscore).exclude(pk=self.id).order_by("nutriscore")[:6]
+        
+        
 
-
+   
 class Favorite(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.PROTECT)
