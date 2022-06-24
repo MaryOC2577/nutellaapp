@@ -1,17 +1,10 @@
 from nutella.management.commands import populate_db
+from pytest import MonkeyPatch
+from django.core.management import call_command
 
 class TestPopulate():
-
-    def get_populate(self):
-        return populate_db
-
-    def test_populate():
-
-        def monkey_populate():
-            cmd_populate = populate_db
-            return cmd_populate
-
-        monkeypatch.setattr(cmd_populate, "pizza", monkey_populate())
-
-        cmd = get_populate()
-        assert cmd == cmd_populate
+    
+    def test_populate(self, monkeypatch):
+        monkeypatch.setattr('requests.get', lambda: {"faux produit"})
+        call_command("populate_db", "pizza", 1, 1)
+        # appel orm faux produit
