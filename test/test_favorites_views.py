@@ -1,28 +1,16 @@
-import unittest
-from django.test import RequestFactory
+from django.test import RequestFactory, TestCase, Client
 from favorite.views import ShowFavorites
 
-class TestLoginViews(unittest.TestCase):
+class TestFavoriteViews(TestCase):
 
-    def setup_view(view, request, *args, **kwargs):
-        """Mimic as_view() returned callable, but returns view instance.
-        args and kwargs are the same you would pass to ``reverse()``
-        """
-        view.request = request
-        view.args = args
-        view.kwargs = kwargs
-        return view
+    def setUp(self):
+        self.client = Client()
     
-    def test_context_data(self):
+    
+    def test_get(self):
         """views.get_context_data() sets 'name' in context."""
-        # Setup name.
-        name = 'favorites'
+ 
         # Setup request and view.
-        request = RequestFactory().get('/favorites')
-        view = ShowFavorites(template_name='favorites.html')
-        view = setup_view(view, request, name=name)
-        # Run.
-        context = view.get_context_data()
-        # Check.
-        self.assertEqual(context['name'], name)
-        
+        response = self.client.get('/favorites/')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'favorite_list.html')
