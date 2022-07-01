@@ -10,16 +10,16 @@ class Command(BaseCommand):
     help = "Closes the specified poll for voting"
 
     def add_arguments(self, parser):
-        parser.add_argument("category", nargs="+", type=str)
-        parser.add_argument("page", nargs="+", type=int)
-        parser.add_argument("page_size", nargs="+", type=int)
+        parser.add_argument("--category",type=str, default="pizza")
+        parser.add_argument("--page", type=int, default=1)
+        parser.add_argument("--page_size", type=int, default=1)
 
     def handle(self, *args, **options):
         category_name = options["category"][0]
         page = options["page"]
         page_size = options["page_size"]
         
-        response = requests.get(
+        response = requests.get(url=
             f"https://fr.openfoodfacts.org/cgi/search.pl?search_terms={category_name}&search_simple=1&action=process&json=1&page={page}&page_size={page_size}"
         )
 
