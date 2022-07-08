@@ -14,7 +14,7 @@ class LoginView(View):
         """Authenticate a user."""
 
         # Etape 1 :
-        email = username = request.POST["email-or-username"]
+        email = username = request.POST["username"]
         password = request.POST["password"]
 
         # Etape 2 :
