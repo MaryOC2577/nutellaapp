@@ -1,6 +1,8 @@
+import json
 from django.test import RequestFactory, TestCase, Client
 from search.views import ProductResult
 from nutella.models import Product, Category
+
 
 class TestOneProductView(TestCase):
 
@@ -12,8 +14,9 @@ class TestOneProductView(TestCase):
         # Product.objects.create(name="pizza3", stores="leclerc", nutriscore="A", category=cat)
         # Product.objects.create(name="pizza4", stores="super u", nutriscore="A", category=cat)
         # Product.objects.create(name="pizza5", stores="aldi", nutriscore="D", category=cat)
-        with open('products.json') as file:
-            for one_product in file:
+        with open('nutella/test/products.json') as l_product:
+            data = json.load(l_product)
+            for one_product in data:
                 Product.objects.create(one_product)
         
     
