@@ -10,7 +10,7 @@ class Command(BaseCommand):
     help = "Closes the specified poll for voting"
 
     def add_arguments(self, parser):
-        parser.add_argument("--category",type=str, default="pizza")
+        parser.add_argument("--category", type=str, default="pizza")
         parser.add_argument("--page", type=int, default=1)
         parser.add_argument("--page_size", type=int, default=1)
 
