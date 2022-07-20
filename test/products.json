@@ -1,5 +1,5 @@
-{"name":"pizza1", "stores":"auchan", "nutriscore":"C", "category":"pizza"}
-{"name":"pizza2", "stores":"carrefour", "nutriscore":"B", "category":"pizza"}
-{"name":"pizza3", "stores":"leclerc", "nutriscore":"A", "category":"pizza"}
-{"name":"pizza4", "stores":"super u", "nutriscore":"A", "category":"pizza"}
-{"name":"pizza5", "stores":"aldi", "nutriscore":"D", "category":"pizza"}
+[{"name":"pizza1", "stores":"auchan", "nutriscore":"C", "category":"pizza"},
+{"name":"pizza2", "stores":"carrefour", "nutriscore":"B", "category":"pizza"},
+{"name":"pizza3", "stores":"leclerc", "nutriscore":"A", "category":"pizza"},
+{"name":"pizza4", "stores":"super u", "nutriscore":"A", "category":"pizza"},
+{"name":"pizza5", "stores":"aldi", "nutriscore":"D", "category":"pizza"}]

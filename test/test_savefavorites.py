@@ -1,8 +1,10 @@
+
 from django.test import RequestFactory, TestCase, Client
 from search.views import SaveFavorites
 from login.authenticate import EmailAuth
 from nutella.models import Category, Product
 from django.contrib.auth import get_user_model
+
 
 class TestSaveFavorites(TestCase):
 

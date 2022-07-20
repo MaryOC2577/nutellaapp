@@ -9,15 +9,11 @@ class TestOneProductView(TestCase):
     def setUp(self):
         self.client = Client()
         cat = Category.objects.create(name="pizza")
-        # Product.objects.create(name="pizza1", stores="auchan", nutriscore="C", category=cat)
-        # Product.objects.create(name="pizza2", stores="carrefour", nutriscore="B", category=cat)
-        # Product.objects.create(name="pizza3", stores="leclerc", nutriscore="A", category=cat)
-        # Product.objects.create(name="pizza4", stores="super u", nutriscore="A", category=cat)
-        # Product.objects.create(name="pizza5", stores="aldi", nutriscore="D", category=cat)
-        with open('nutella/test/products.json') as l_product:
+        with open("./test/products.json") as l_product:
             data = json.load(l_product)
             for one_product in data:
-                Product.objects.create(one_product)
+                if cat == one_product["category"]:
+                    Product.objects.create(**one_product)
         
     
     

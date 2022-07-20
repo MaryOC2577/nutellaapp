@@ -3,7 +3,6 @@ from selenium import webdriver
 
 class TestUser():
 
-    
     # Set firefox drivers
     self.driver = webdriver.Firefox()
     # Create a user
@@ -29,32 +28,16 @@ class TestUser():
         self.assertEqual(self.drivers.user, self.my_user)
 
     # User search
-    def user_search():
+    def user_search(self):
         self.driver.get('http://127.0.0.1:8000/search')
     
     # User save favorite
 
     # User favorite page
-    self.driver.get('http://127.0.0.1:8000/favorites')
-
-
+    def user_favorites(self):
+        self.driver.get('http://127.0.0.1:8000/favorites')
 
     def tearDown():
         self.driver.quit()
 
-
-
-
-# def test_user_login():
-#     setUp()
-#     # create a user
-#     my_user = login.user.objects.create_user(username="username", email="username@mail.fr", password="password")
-#     # open login page
-#     selenium.get('http://127.0.0.1:8000/login')
-#     # user login
-#     username.send_keys(my_user.username)
-#     password.send_keys(my_user.password)
-#     self.driver.find_element_by_css_selector('logBtn').click()
-#     assert self.driver.user == my_user
-#     tearDown()
 
