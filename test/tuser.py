@@ -1,5 +1,7 @@
 import selenium
 from selenium import webdriver
+import login
+from selenium.webdriver.chrome.options import Options
 
 class TestUser():
 
