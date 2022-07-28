@@ -46,8 +46,9 @@ class SearchView(View):
 
 class SaveFavorites(View):
     def get(self, request, pk):
-
         favsave = Favorite(product=Product.objects.get(pk=pk), user=request.user)
         favsave.save()
-        print("test request get", request.GET)
+        print('**********************')
+        print('\r\n'.join('{}: {}'.format(k, v) for k, v in self.request.headers.items()),
+        self.request.body)
         return redirect("oneproduct", self.request.session["product_id"])

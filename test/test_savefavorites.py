@@ -20,8 +20,10 @@ class TestSaveFavorites(TestCase):
         User.objects.create_user(**self.credentials)
         self.auth.authenticate(self.credentials)
         response = self.client.post('/login/', self.credentials, follow=True)
+        return response
 
     def test_save_favorites(self):
         response = self.client.get('/search/savefavorite/1/')
         self.assertEqual(response.status_code, 301)
         self.assertTemplateUsed(response, 'product.html')
+        
