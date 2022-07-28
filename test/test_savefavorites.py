@@ -27,3 +27,4 @@ class TestSaveFavorites(TestCase):
         self.assertEqual(response.status_code, 301)
         self.assertTemplateUsed(response, 'product.html')
         
+
