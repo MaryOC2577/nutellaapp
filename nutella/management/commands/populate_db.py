@@ -19,8 +19,8 @@ class Command(BaseCommand):
         page = options["page"]
         page_size = options["page_size"]
         
-        response = requests.get(url=
-            f"https://fr.openfoodfacts.org/cgi/search.pl?search_terms={category_name}&search_simple=1&action=process&json=1&page={page}&page_size={page_size}"
+        response = requests.get(
+            url=f"https://fr.openfoodfacts.org/cgi/search.pl?search_terms={category_name}&search_simple=1&action=process&json=1&page={page}&page_size={page_size}"
         )
 
         product_list = response.json()
@@ -31,17 +31,17 @@ class Command(BaseCommand):
             if not self.check_product_data(product_data):
                 continue
        
-            product = Product.objects.update_or_create(
-                name=product_data["product_name_fr"],
-                stores=product_data["stores"],
-                nutriscore=product_data["nutrition_grade_fr"].upper(),
-                url=product_data["url"],
-                image=product_data["image_url"],
-                nutrition=product_data["image_nutrition_url"],
-                category=cat
+                product = Product.objects.update_or_create(
+                    name=product_data["product_name_fr"],
+                    stores=product_data["stores"],
+                    nutriscore=product_data["nutrition_grade_fr"].upper(),
+                    url=product_data["url"],
+                    image=product_data["image_url"],
+                    nutrition=product_data["image_nutrition_url"],
+                    category=cat
+                )
 
-            )
-
+                product.save()
             
 
             print(
@@ -68,3 +68,4 @@ class Command(BaseCommand):
         if not "stores" in product_data:
             return False
         return True
+        

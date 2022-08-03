@@ -21,7 +21,7 @@ The repository on GitHub is availiable [here](https://github.com/MaryOC2577/nute
     3. . .venv.Scripts.activate 
     4. Add requirements : pip freeze > requirements.txt
 * Step 3
-    * In the terminal : python manage.py populate_db category_name number_of_pages number_of_products. This command allows you to populate the database, category_name indicates the category of the products, number_of_pages indicates the number of maximum pages and number_of_products indicates the maximum products.
+    * In the terminal : python manage.py populate_db --category_name --number_of_pages number_of_products. This command allows you to populate the database, category_name indicates the category of the products, number_of_pages indicates the number of maximum pages and number_of_products indicates the maximum products.
 
 ## **How to use**
 In the terminal : python manage.py runserver to launch the application. Open the link in your brower and you can use the application.

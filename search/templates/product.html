@@ -27,6 +27,12 @@
 <br>
 Voir sur <a href="{{product.url}}">OpenFoodFacts</a>
 
+
+
+
+{% endblock %}
+
+{% block history %}
 </p>
 
 {% for product in substitutes %}
@@ -35,7 +41,7 @@ Voir sur <a href="{{product.url}}">OpenFoodFacts</a>
     <tr>
         <td>
 
-            <form method="GET" action="{% url 'favorite:favorite' product.id %}">
+            <form method="GET" action="{% url 'favorite' product.id %}">
                 <div class="box">
                     {% csrf_token %}
                     <div>
@@ -54,11 +60,6 @@ Voir sur <a href="{{product.url}}">OpenFoodFacts</a>
 
 </p>
 {% endfor %}
-
-
-{% endblock %}
-
-{% block history %}
 {% endblock %}
 
 {% block contact %}
