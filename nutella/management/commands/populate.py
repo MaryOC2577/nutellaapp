@@ -54,16 +54,4 @@ class Command(BaseCommand):
             product.categories.add(*[cat.id for cat in categories])
             product.save()
 
-            print(
-                "Nom du produit : ",
-                product_data["product_name_fr"],
-                "\nCatégories : ",
-                product_data["categories"],
-                "\nMagasins :",
-                product_data["stores"],
-                "\nNutriscore : ",
-                product_data["nutrition_grade_fr"],
-                "\nUrl : ",
-                product_data["url"],
-                "\n",
-            )
+            print("Les données ont été enregistrées avec succès.")

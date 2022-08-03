@@ -53,5 +53,5 @@ class SaveFavorites(View):
         print('**********************')
         print('\r\n'.join('{}: {}'.format(k, v) for k, v in self.request.headers.items()),
         self.request.body)
-        # return redirect("oneproduct", self.request.session["product_id"])
-        return redirect(reverse('oneproduct', args=["product_id"]))
+        return redirect("oneproduct", self.request.session["product_id"])
+     

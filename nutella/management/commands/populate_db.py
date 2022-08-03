@@ -44,19 +44,7 @@ class Command(BaseCommand):
                 product.save()
             
 
-            print(
-                "Nom du produit : ",
-                product_data["product_name_fr"],
-                "\nCatégories : ",
-                product_data["categories"],
-                "\nMagasins :",
-                product_data["stores"],
-                "\nNutriscore : ",
-                product_data["nutrition_grade_fr"],
-                "\nUrl : ",
-                product_data["url"],
-                "\n",
-            )
+        print("Les données ont été enregistrées avec succès.")
 
     def check_product_data(self, product_data):
         if not "categories_lc" in product_data: 
