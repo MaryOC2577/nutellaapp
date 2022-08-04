@@ -11442,6 +11442,29 @@ header.masthead table {
   
 }
 
+.subbox{
+  display: inline-block;
+  flex-direction: column;
+  width: auto;
+  height: auto;
+  flex-wrap: nowrap;
+  text-align: center;
+  vertical-align: top;
+  align-content: space-between;
+  margin-inline: 5px;
+  background-color: orange;
+  border-radius: 3px;
+}
+
+.subbox > form {
+  flex: 1;
+}
+
+.subbox > img {
+  width: 20px;
+  height: 20px;
+}
+
 @media (min-width: 992px) {
   header.masthead {
     height: 100vh;

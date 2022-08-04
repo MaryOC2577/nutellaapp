@@ -21,6 +21,9 @@ from login.views import registration
 class Home(TemplateView):
     template_name = "index.html"
 
+class Legal(TemplateView):
+    template_name = "legal.html"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", Home.as_view(), name="home"),
@@ -28,4 +31,5 @@ urlpatterns = [
     path("registration/", registration, name="registration"),
     path("search/", include("search.urls")),
     path("favorites/", include("favorite.urls")),
+    path("legal/", Legal.as_view(), name="legal")
 ]

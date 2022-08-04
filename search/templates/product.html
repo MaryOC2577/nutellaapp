@@ -30,36 +30,27 @@ Voir sur <a href="{{product.url}}">OpenFoodFacts</a>
 
 
 
+
 {% endblock %}
 
 {% block history %}
-</p>
 
-{% for product in substitutes %}
 <p>
-<table>
-    <tr>
-        <td>
-
-            <form method="GET" action="{% url 'favorite' product.id %}">
-                <div class="box">
+    {% for product in substitutes %}
+    <div class="subbox">
+                <form method="GET" action="{% url 'favorite' product.id %}">
                     {% csrf_token %}
-                    <div>
+                    
                         <img src="{{product.image}}"><br>
                         {{product.name}}
                         {{product.nutriscore}}<br>
                         <input type="submit" value="SAUVEGARDER">
-                    </div>
+                    
+                </form>
+    </div>
 
-                </div>
-            </form>
-        </td>
-
-    </tr>
-</table>
-
-</p>
-{% endfor %}
+    {% endfor %}
+    </p>
 {% endblock %}
 
 {% block contact %}
