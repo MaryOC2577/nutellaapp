@@ -22,9 +22,9 @@ class Product(models.Model):
         unavaillable_substitutes = list(
             set([favorite.product.id for favorite in Favorite.objects.all()])
         )
+        # return the 6 products with the best possible nutriscore
+        return Product.objects.filter(category=self.category, nutriscore__lte=self.nutriscore).exclude(pk=self.id).exclude(unavaillable_substitutes).order_by("nutriscore")[:6]
 
-        # retourner les 6 produits avec le meilleur nutriscore possible
-        return Product.objects.filter(category=self.category, nutriscore__lte=self.nutriscore).exclude(pk=self.id).order_by("nutriscore")[:6]  
 
 class Favorite(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
