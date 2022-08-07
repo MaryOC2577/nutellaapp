@@ -1,6 +1,8 @@
-from django.shortcuts import get_object_or_404, render, redirect, reverse
-from django.views.generic import View, ListView, DetailView, CreateView
-from nutella.models import Product, Category, Favorite
+""" Contains the views of the search application. """
+
+from django.shortcuts import render, redirect
+from django.views.generic import View, ListView, DetailView
+from nutella.models import Product, Favorite
 
 
 class ProductResult(ListView):
@@ -46,12 +48,9 @@ class SearchView(View):
 
 class SaveFavorites(View):
 
-    
     def get(self, request, pk):
         favsave = Favorite(product=Product.objects.get(pk=pk), user=request.user)
         favsave.save()
         print('**********************')
-        print('\r\n'.join('{}: {}'.format(k, v) for k, v in self.request.headers.items()),
-        self.request.body)
+        print('\r\n'.join('{}: {}'.format(k, v) for k, v in self.request.headers.items()), self.request.body)
         return redirect("oneproduct", self.request.session["product_id"])
-     

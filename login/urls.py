@@ -1,5 +1,6 @@
+""" Contains the urls of the login application. """
+
 from django.urls import path
-from django.urls.conf import include
 from . import views
 
 

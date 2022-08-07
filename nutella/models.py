@@ -1,6 +1,6 @@
+""" Database models. """
+
 from django.db import models
-from django.shortcuts import get_object_or_404
-from django.db.models import Q
 from login.models import User
 
 
@@ -24,11 +24,8 @@ class Product(models.Model):
         )
 
         # retourner les 6 produits avec le meilleur nutriscore possible
-        return Product.objects.filter(category=self.category, nutriscore__lte=self.nutriscore).exclude(pk=self.id).order_by("nutriscore")[:6]
-        
-        
+        return Product.objects.filter(category=self.category, nutriscore__lte=self.nutriscore).exclude(pk=self.id).order_by("nutriscore")[:6]  
 
-   
 class Favorite(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.PROTECT)

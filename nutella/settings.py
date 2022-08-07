@@ -11,8 +11,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import os
-import dj_database_url
-import psycopg2
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -29,7 +27,6 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-yl86^a6v*rf)+t
 DEBUG = True
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "nutellaapp.herokuapp.com"]
  
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -77,9 +74,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'nutella.wsgi.application'
 
-
-
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -97,8 +91,6 @@ DATABASES = {
 
 # developpement
 # DATABASES = {'default': dj_database_url.parse(os.getenv('DATABASE_URL'))}
-
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {

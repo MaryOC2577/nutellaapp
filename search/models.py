@@ -1,6 +1,7 @@
-from django.db import models
+""" Search model. """
+
 from django.views.generic import ListView
-from nutella.models import Product, Category
+from nutella.models import Product
 
 
 class SearchProduct(ListView):

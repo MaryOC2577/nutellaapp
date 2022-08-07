@@ -1,6 +1,7 @@
-from django.urls import path
-from django.urls.conf import include
+""" Contains the urls of the favorite application. """
+
 from . import views
+from django.urls import path
 
 app_name = "favorite"
 

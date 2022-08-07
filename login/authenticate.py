@@ -1,7 +1,10 @@
+""" Authentication module. """
+
 from django.contrib.auth import get_user_model
 
 
-UserModel = get_user_model()  # récupère l'objet User même s'il a été modifié ailleurs
+UserModel = get_user_model()
+""" Get the User object even if it has been modified elsewhere. """
 
 
 class EmailAuth:
@@ -15,8 +18,8 @@ class EmailAuth:
         try:
             user = UserModel.objects.get(email=email)
         except UserModel.DoesNotExist:
-            # Run the default password hasher once to reduce the timing
-            # difference between an existing and a nonexistent user (#20760).
+            # Run the default password hasher once to reduce the timing.
+            # Difference between an existing and a nonexistent user.
             UserModel().set_password(password)
         else:
             if user.check_password(password) and self.user_can_authenticate(user):

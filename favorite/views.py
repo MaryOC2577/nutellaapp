@@ -1,9 +1,9 @@
+""" Contains the views of the favorite application. """
+
 from django.views import View
 from django.views.generic import ListView
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from nutella.models import Favorite
-from login.models import User
-from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 

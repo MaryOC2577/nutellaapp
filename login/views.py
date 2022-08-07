@@ -1,3 +1,5 @@
+""" Contains the views of the login application. """
+
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
@@ -13,19 +15,18 @@ class LoginView(View):
     def post(self, request):
         """Authenticate a user."""
 
-        # Etape 1 :
+        # Step 1 :
         email = username = request.POST["username"]
         password = request.POST["password"]
 
-        # Etape 2 :
+        # Step 2 :
         user = authenticate(request, email=email, username=username, password=password)
 
-        # Etape 3 :
+        # Step 3 :
         if user is not None:
             login(request, user)
             messages.add_message(request, messages.SUCCESS, "Vous êtes connecté !")
             return redirect("account")
-        
         else:
             messages.add_message(
                 request, messages.ERROR, "Les champs renseignés sont invalides."
@@ -65,3 +66,4 @@ class MyAccount(TemplateView):
         context = super().get_context_data(**kwargs)
         context['user'] = self.request.user
         return context
+        
