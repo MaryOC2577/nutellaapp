@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -77,19 +78,19 @@ WSGI_APPLICATION = 'nutella.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "nutella",
-        "USER": "nutuser",
-        "PASSWORD": "nut77ella25",
-        "HOST": "127.0.0.1",
-        "PORT": "5432",
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "nutella",
+#         "USER": "nutuser",
+#         "PASSWORD": "nut77ella25",
+#         "HOST": "127.0.0.1",
+#         "PORT": "5432",
+#     }
+# }
 
 # developpement
-# DATABASES = {'default': dj_database_url.parse(os.getenv('DATABASE_URL'))}
+DATABASES = {'default': dj_database_url.parse(os.getenv('DATABASE_URL'))}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
