@@ -83,7 +83,7 @@ DATABASES = {
          "ENGINE": "django.db.backends.postgresql",
          "NAME": "rdb-zealous-pascal",
          "USER": "nutuser",
-         "PASSWORD": "Nut77ella@",
+         "PASSWORD": "nut77ella25",
          "HOST": "localhost",
          "PORT": "5432",
      }
