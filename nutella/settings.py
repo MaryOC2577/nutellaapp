@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'login',
     'search',
     'favorite',
+    'django_crontab',
 ]
 
 MIDDLEWARE = [
