@@ -85,8 +85,8 @@ DATABASES = {
          "NAME": "rdb",
          "USER": "nutjane",
          "PASSWORD": "Nut77Jane@",
-         "HOST": "localhost",
-         "PORT": "",
+         "HOST": "51.159.11.125",
+         "PORT": "45754",
      }
 }
 
