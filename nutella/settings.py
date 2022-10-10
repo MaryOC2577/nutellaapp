@@ -149,3 +149,7 @@ AUTH_USER_MODEL = "login.User"  # cette variable pointe sur le modèle User à u
 # LOGIN_REDIRECT_URL = reverse_lazy('account')
 # LOGIN_URL = reverse_lazy('login')
 # LOGOUT_REDIRECT_URL = reverse_lazy('logout')
+
+CRONJOBS = [
+    ('0 0 * * 0', 'myapp.cron.my_cron_job')
+]
