@@ -9,10 +9,15 @@ python:
   - "3.9"
   - "3.9-dev"  # 3.9 development branch
 
-install:
+before_script:
   - pip install -r requirements.txt
+
+env: DJANGO_SETTINGS_MODULE="nutella.settings"
+
+services:
+  - postgresql
+  - docker
+
 # command to run tests
 script:
-  - pytest
-services:
-  - docker
+  - ./manage.py test
