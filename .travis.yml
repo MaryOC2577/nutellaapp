@@ -1,6 +1,6 @@
 language: python
 python:
-  - "3.6"      # current default Python on Travis CI
+  - "3.9"
 
 before_script:
   - pip install -r requirements.txt
