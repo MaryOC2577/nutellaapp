@@ -13,4 +13,4 @@ services:
 
 # command to run tests
 script:
-  - ./manage.py test
+  - python3 manage.py test
