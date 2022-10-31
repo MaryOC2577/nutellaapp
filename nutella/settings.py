@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 import dj_database_url
 import sentry_sdk
+from sentry_sdk.integrations.django import DjangoIntegration
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -159,8 +160,18 @@ CRONJOBS = [("0 0 * * 0", "myapp.cron.my_cron_job")]
 
 sentry_sdk.init(
     dsn="https://d3da1ddeeb7842179208ab24a6568be7@o4504078444920832.ingest.sentry.io/4504078456913920",
+    integrations=[DjangoIntegration()],
     # Set traces_sample_rate to 1.0 to capture 100%
     # of transactions for performance monitoring.
-    # We recommend adjusting this value in production.
+    # We recommend adjusting this value in production,
+    traces_sample_rate=1.0,
+    # If you wish to associate users to errors (assuming you are using
+    # django.contrib.auth) you may enable sending PII data.
+    send_default_pii=True,
+    # By default the SDK will try to use the SENTRY_RELEASE
+    # environment variable, or infer a git commit
+    # SHA as release, however you may want to set
+    # something more human-readable.
+    # release="myapp@1.0.0",
     traces_sample_rate=1.0,
 )
