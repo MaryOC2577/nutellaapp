@@ -27,12 +27,17 @@ class Legal(TemplateView):
     template_name = "legal.html"
 
 
+class Test_bug(TemplateView):
+    template_name = "test_bug.html"
+
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path("admin/", admin.site.urls),
     path("", Home.as_view(), name="home"),
     path("login/", include("login.urls")),
     path("registration/", registration, name="registration"),
     path("search/", include("search.urls")),
     path("favorites/", include("favorite.urls")),
-    path("legal/", Legal.as_view(), name="legal")
+    path("legal/", Legal.as_view(), name="legal"),
+    path("test_bug/", Test_bug.as_view(), name="test_bug"),
 ]

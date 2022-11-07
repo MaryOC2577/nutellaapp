@@ -26,17 +26,17 @@ class Command(BaseCommand):
         for product_data in product_list["products"]:
             if not self.check_product_data(product_data):
                 continue
-                product = Product.objects.update_or_create(
+            else:
+                Product.objects.update_or_create(
                     name=product_data["product_name_fr"],
                     stores=product_data["stores"],
                     nutriscore=product_data["nutrition_grade_fr"].upper(),
                     url=product_data["url"],
                     image=product_data["image_url"],
                     nutrition=product_data["image_nutrition_url"],
-                    category=cat
+                    category=cat,
                 )
 
-                product.save()
         print("Les données ont été enregistrées avec succès.")
 
     def check_product_data(self, product_data):

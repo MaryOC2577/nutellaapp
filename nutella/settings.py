@@ -173,5 +173,4 @@ sentry_sdk.init(
     # SHA as release, however you may want to set
     # something more human-readable.
     # release="myapp@1.0.0",
-    traces_sample_rate=1.0,
 )
