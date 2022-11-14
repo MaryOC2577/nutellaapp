@@ -28,7 +28,7 @@ class Command(BaseCommand):
                 continue
             else:
                 print(cat)
-                product = Product.objects.update_or_create(
+                Product.objects.update_or_create(
                     name=product_data["product_name_fr"],
                     stores=product_data["stores"],
                     nutriscore=product_data["nutrition_grade_fr"].upper(),
@@ -37,7 +37,7 @@ class Command(BaseCommand):
                     nutrition=product_data["image_nutrition_url"],
                     # category=cat,
                 )
-                product.category.add
+                # product.category.add
         print("Les données ont été enregistrées avec succès.")
 
     def check_product_data(self, product_data):
