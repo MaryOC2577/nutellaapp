@@ -86,14 +86,15 @@ WSGI_APPLICATION = "nutella.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "rdb",
-        "USER": "nutjane",
-        "PASSWORD": "Nut77Jane@",
-        "HOST": "51.159.11.125",
-        "PORT": "45754",
+        "ENGINE": os.environ.get("ENGINE"),
+        "NAME": os.environ.get("BASENAME"),
+        "USER": os.environ.get("BASEUSER"),
+        "PASSWORD": os.environ.get("BASEPASSWORD"),
+        "HOST": os.environ.get("BASEHOST"),
+        "PORT": os.environ.get("BASEPORT"),
     }
 }
+
 
 # developpement
 # DATABASES = {'default': dj_database_url.config(os.getenv('DATABASE_URL'))}
