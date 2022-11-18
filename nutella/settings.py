@@ -85,7 +85,7 @@ WSGI_APPLICATION = "nutella.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": os.environ.get("ENGINE"),
+        "ENGINE": os.environ.get("BASENGINE"),
         "NAME": os.environ.get("BASENAME"),
         "USER": os.environ.get("BASEUSER"),
         "PASSWORD": os.environ.get("BASEPASSWORD"),
