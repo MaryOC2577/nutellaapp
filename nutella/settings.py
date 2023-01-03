@@ -81,23 +81,29 @@ WSGI_APPLICATION = "nutella.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-
-DATABASES = {
-    "default": {
-        "ENGINE": os.environ.get("BASENGINE"),
-        "NAME": os.environ.get("BASENAME"),
-        "USER": os.environ.get("BASEUSER"),
-        "PASSWORD": os.environ.get("BASEPASSWORD"),
-        "HOST": os.environ.get("BASEHOST"),
-        "PORT": os.environ.get("BASEPORT"),
-    }
-}
-
-
+# DATABASES = {
+#     "default": {
+#         "ENGINE": os.environ.get("BASENGINE"),
+#         "NAME": os.environ.get("BASENAME"),
+#         "USER": os.environ.get("BASEUSER"),
+#         "PASSWORD": os.environ.get("BASEPASSWORD"),
+#         "HOST": os.environ.get("BASEHOST"),
+#         "PORT": os.environ.get("BASEPORT"),
+#     }
+# }
 # developpement
 # DATABASES = {'default': dj_database_url.config(os.getenv('DATABASE_URL'))}
 
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "nutella",
+        "USER": "nutuser",
+        "PASSWORD": "nut77ella25",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
+    }
+}
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -134,10 +140,10 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
-# STATIC_ROOT = os.path.join(BASE_DIR, '/static/')
+# STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = os.path.join(BASE_DIR, "/static/")
 
-# STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
@@ -173,4 +179,8 @@ sentry_sdk.init(
     # SHA as release, however you may want to set
     # something more human-readable.
     # release="myapp@1.0.0",
+)
+
+EMAIL_BACKEND = (
+    "django.core.mail.backends.console.EmailBackend"  # During development only
 )
