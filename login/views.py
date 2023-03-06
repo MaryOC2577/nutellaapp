@@ -1,11 +1,15 @@
 """ Contains the views of the login application. """
 
+from __future__ import print_function
 from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.views.generic import View, TemplateView
-from login.models import User
+from login.models import User, PassChange
+from login.mail import send_reset_password_mail
+import uuid
+from datetime import datetime, timezone, timedelta
 
 
 class LoginView(View):
@@ -69,4 +73,58 @@ class MyAccount(TemplateView):
 
 
 class PasswordReset(TemplateView):
-    template_name = "password_reset_form.html"
+    template_name = "change_password.html"
+
+
+class PasswordDone(TemplateView):
+    template_name = "password_done.html"
+
+    def post(self, request):
+        umail = self.request.POST.get("usermail", "")
+
+        if umail:
+            try:
+                user = User.objects.get(email=umail)
+                myuuid = uuid.uuid4()
+
+            except Exception:
+                pass
+            else:
+                PassChange.objects.create(email=umail, token=myuuid)
+                send_reset_password_mail(umail, myuuid, user)
+                print(f"{request.get_host()}/login/password_reset/{myuuid}")
+        return render(request=request, template_name="password_done.html")
+
+
+class NewPassword(TemplateView):
+    template_name = "new_password.html"
+
+    def get(self, request, **kwargs):
+        # récupérer passchange équivalent au token
+        passchange = PassChange.objects.get(token=kwargs.get("token"))
+        print(passchange.date)
+        # vérifier que le token existe et que la date est valide
+        if datetime.now(timezone.utc) - passchange.date > timedelta(minutes=20):
+            print("perimee")
+            return render(request, "wrong_token.html")
+        else:
+            return render(request, "new_password.html")
+
+
+class ChangePassword(TemplateView):
+    template_name = "new_password.html"
+
+    def post(self, request):
+        email = request.POST.get("email")
+        newpassword = request.POST.get("newpass")
+        newpasswordtwo = request.POST.get("newpasstwo")
+        username = User.objects.get(email=email).username
+        if newpassword != newpasswordtwo:
+            return render(
+                request,
+                "registration.html",
+                {"error": "Les mots de passe de correspondent pas."},
+            )
+
+        User.objects.update(password=newpassword)
+        return HttpResponse(f"Bienvenue {username} !")
