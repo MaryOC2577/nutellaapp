@@ -102,7 +102,9 @@ DATABASES = {
         "PASSWORD": "nut77ella25",
         "HOST": "127.0.0.1",
         "PORT": "5432",
-    }
+        # "TEST": {"MIRROR": "test"},
+    },
+    # "test": {"ENGINE": "django.db.backends.sqlite3", "NAME": "only4test.sqlite"},
 }
 
 AUTH_PASSWORD_VALIDATORS = [
