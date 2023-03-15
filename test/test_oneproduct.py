@@ -1,6 +1,4 @@
 from django.test import TestCase, Client
-
-# from search.views import OneProduct
 from nutella.models import Product, Category
 
 

@@ -1,7 +1,5 @@
 from django.test import TestCase, Client
 
-# from search.views import ProductResult
-
 
 class TestSearchViews(TestCase):
     def setUp(self):

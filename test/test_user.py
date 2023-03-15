@@ -1,13 +1,6 @@
 import time
-
-# import login
-# import selenium
-
-# from login import User
 from django.urls import reverse
 from selenium import webdriver
-
-# from selenium.webdriver.firefox import options
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
 

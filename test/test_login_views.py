@@ -1,7 +1,5 @@
 from django.test import TestCase, Client
 
-# from login.views import LoginView
-
 
 class TestLoginViews(TestCase):
     def setUp(self):

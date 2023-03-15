@@ -1,6 +1,4 @@
 from django.test import TestCase, Client
-
-# from favorite.views import ShowFavorites
 from django.contrib.auth import get_user_model
 
 

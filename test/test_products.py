@@ -1,7 +1,4 @@
 import pytest
-
-# from django.urls import reverse
-# from django.test import Client
 from nutella.models import Product, Category
 
 

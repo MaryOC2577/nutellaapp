@@ -1,7 +1,5 @@
 import json
 from django.test import TestCase, Client
-
-# from search.views import ProductResult
 from nutella.models import Product, Category
 
 

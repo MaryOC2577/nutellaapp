@@ -1,8 +1,4 @@
 import pytest
-
-# import os
-# from nutella.management.commands import populate_db
-# from pytest import MonkeyPatch
 from django.core.management import call_command
 
 
