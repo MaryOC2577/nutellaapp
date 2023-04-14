@@ -108,8 +108,10 @@ class NewPassword(TemplateView):
             print("perimee")
             return render(request, "wrong_token.html")
         else:
-            return render(request, "new_password.html")
-
+            return render(request, "login.html")
+        # gérér l'exception si le token n'existe pas doesnotexist et afficher la page wrong token
+        except:
+            
 
 class ChangePassword(TemplateView):
     template_name = "new_password.html"
