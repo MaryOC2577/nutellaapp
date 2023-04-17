@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "search",
     "favorite",
     "django_crontab",
+    # "django_nose",
 ]
 
 MIDDLEWARE = [
@@ -186,3 +187,12 @@ sentry_sdk.init(
 EMAIL_BACKEND = (
     "django.core.mail.backends.console.EmailBackend"  # During development only
 )
+
+# # Use nose to run all tests
+# TEST_RUNNER = "django_nose.NoseTestSuiteRunner"
+
+# # Tell nose to measure coverage on the 'foo' and 'bar' apps
+# NOSE_ARGS = [
+#     "--with-coverage",
+#     "--cover-package=foo,bar",
+# ]

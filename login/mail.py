@@ -14,7 +14,10 @@ def send_reset_password_mail(email, token, user):
     )
     subject = "Renouvellement mot de passe Nutella"
     sender = {"name": "Sendinblue", "email": "contact@sendinblue.com"}
-    html_content = f"<html><body><h1><a href='127.0.0.1:8000/login/password_reset/{token}'>Renouveller votre mot de passe.</a></h1><br></body></html>"
+    html_content = (
+        f"""<html><body><h1><a href='127.0.0.1:8000/login/password_reset/{token}'>"""
+        """Renouveller votre mot de passe.</a></h1><br></body></html>"""
+    )
     to = [{"email": email, "name": "user"}]
     send_smtp_email = sib_api_v3_sdk.SendSmtpEmail(
         to=to,
@@ -25,5 +28,7 @@ def send_reset_password_mail(email, token, user):
     try:
         api_response = api_instance.send_transac_email(send_smtp_email)
         print(api_response)
+        return api_response
     except ApiException as e:
         print("Exception when calling SMTPApi->send_transac_email: %s\n" % e)
+        return None

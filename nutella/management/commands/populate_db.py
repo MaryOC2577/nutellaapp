@@ -13,10 +13,11 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         category_name = options["category"][0]
-        page = options["page"]
-        page_size = options["page_size"]
+        # page = options["page"]
+        # page_size = options["page_size"]
         response = requests.get(
-            url=f"https://fr.openfoodfacts.org/cgi/search.pl?search_terms={category_name}&search_simple=1&action=process&json=1&page={page}&page_size={page_size}"
+            url=f"""https://fr.openfoodfacts.org/cgi/search.pl?search_terms={category_name}"""
+            """&search_simple=1&action=process&json=1&page={page}&page_size={page_size}"""
         )
 
         product_list = response.json()
