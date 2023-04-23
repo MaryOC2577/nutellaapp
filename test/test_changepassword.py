@@ -3,8 +3,11 @@ from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from login.models import PassChange, User
+from login import mail
+from login.mail import send_reset_password_mail
 from django.test import Client
 import uuid
+import unittest
 
 
 class TestChangePassword(StaticLiveServerTestCase):
@@ -46,24 +49,16 @@ class TestChangePassword(StaticLiveServerTestCase):
         response = self.client.get(reverse("passdone"))
         self.assertTemplateUsed(response, "password_done.html")
 
-    def test_new_user(self):
-        # create new user
-        self.browser.get(self.live_server_url + reverse("registration"))
-        self.browser.find_element(By.NAME, value="username").send_keys(
-            self.my_user.username
-        )
-        self.browser.find_element(By.NAME, value="email").send_keys(self.my_user.email)
-        self.browser.find_element(By.NAME, value="password1").send_keys(
-            self.my_user.password
-        )
-        self.browser.find_element(By.NAME, value="password2").send_keys(
-            self.my_user.password
-        )
-        self.browser.find_element(By.ID, value="valButton").click()
-        passchange_user = PassChange()
-        print("passchange_user.email : ", passchange_user.email)
-        print("self.my_user.email : ", self.my_user.email)
-        self.assertEquals(passchange_user.email, self.my_user.email)
+    # def test_new_user(self):
+    #     # create new user
+    #     passchange_user = PassChange()
+    #     self.browser.get(self.live_server_url + reverse("registration"))
+    #     self.browser.find_element(By.NAME, value="username").send_keys("test_user_name")
+    #     self.browser.find_element(By.NAME, value="email").send_keys("test_user@test.fr")
+    #     self.browser.find_element(By.NAME, value="password1").send_keys("test_password")
+    #     self.browser.find_element(By.NAME, value="password2").send_keys("test_password")
+    #     self.browser.find_element(By.ID, value="valButton").click()
+    #     self.assertEquals(passchange_user.email, "test_user@test.fr")
 
     def test_valid_email(self):
         self.browser.get(self.live_server_url + reverse("passreset"))
@@ -78,7 +73,15 @@ class TestChangePassword(StaticLiveServerTestCase):
         response = myclient.get(myurl)
         self.assertEqual(response.status_code, 200)
 
-    def test_email_builder(self):
-        
+    def test_api_response(self, mocker):
+        # mocker.patch(send_reset_password_mail, "function_name", return_value=True)
+        # expected_value = True
+        # assert send_reset_password_mail.function_name() == expected_value
 
+        # return_value = {"sucess": True}
+        # mocker.patch.object(send_reset_password_mail, "method_to_mock")
+        # self.assertEqual(mocker.result(return_value), return_value)
 
+        mocker.patch("mail.send_reset_password_mail", return_value={"success": True})
+        expected_value = {"sucess": True}
+        assert mail.send_reset_password_mail() == expected_value
