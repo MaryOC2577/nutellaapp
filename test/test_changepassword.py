@@ -49,16 +49,11 @@ class TestChangePassword(StaticLiveServerTestCase):
         response = self.client.get(reverse("passdone"))
         self.assertTemplateUsed(response, "password_done.html")
 
-    # def test_new_user(self):
-    #     # create new user
-    #     passchange_user = PassChange()
-    #     self.browser.get(self.live_server_url + reverse("registration"))
-    #     self.browser.find_element(By.NAME, value="username").send_keys("test_user_name")
-    #     self.browser.find_element(By.NAME, value="email").send_keys("test_user@test.fr")
-    #     self.browser.find_element(By.NAME, value="password1").send_keys("test_password")
-    #     self.browser.find_element(By.NAME, value="password2").send_keys("test_password")
-    #     self.browser.find_element(By.ID, value="valButton").click()
-    #     self.assertEquals(passchange_user.email, "test_user@test.fr")
+    def test_count_user(self):
+        self.assertEqual(User.objects.count(), 1)
+
+    def test_count_passchange(self):
+        self.assertEqual(PassChange.objects.count(), 1)
 
     def test_valid_email(self):
         self.browser.get(self.live_server_url + reverse("passreset"))
@@ -66,6 +61,9 @@ class TestChangePassword(StaticLiveServerTestCase):
         self.browser.find_element(By.NAME, "valbutton").click()
         # Check if email user is in passchange
         self.assertEqual(self.passchange.email, self.my_user.email)
+
+    def test_token_not_empty(self):
+        assert self.mytoken != ""
 
     def test_valid_token(self):
         myclient = Client()
@@ -85,3 +83,11 @@ class TestChangePassword(StaticLiveServerTestCase):
         mocker.patch("mail.send_reset_password_mail", return_value={"success": True})
         expected_value = {"sucess": True}
         assert mail.send_reset_password_mail() == expected_value
+
+    def test_mail_subject(mocker):
+        mocker.patch(
+            "mail.send_reset_password_mail",
+            return_value="Renouvellement mot de passe Nutella",
+        )
+        subject = mail.send_reset_password_mail()
+        assert subject != ""

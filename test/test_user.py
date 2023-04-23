@@ -2,6 +2,7 @@ import time
 from django.urls import reverse
 from selenium import webdriver
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from login.models import User
 
 
 class TestUser(StaticLiveServerTestCase):
@@ -49,11 +50,13 @@ class TestUser(StaticLiveServerTestCase):
 class TestLoginPage(StaticLiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Firefox(executable_path="geckodriver")
-        # self.test_user = User.objects.create(
-        #     username="test1",
-        #     email="test1@test.fr",
-        #     passwword="test1",
-        # )
+        self.test_user = User.objects.create(
+            username="test1",
+            email="test1@test.fr",
+            password="test1",
+        )
+
+    def tearDown(self):
         self.browser.close()
 
     def test_valid_login(self):
