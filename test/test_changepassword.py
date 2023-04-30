@@ -1,13 +1,15 @@
+from login.models import PassChange, User
+from login.mail import send_reset_password_mail
+from login.authenticate import EmailAuth
 from django.urls import reverse
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from django.test import TestCase, Client
+from django.contrib.auth import get_user_model
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from login.models import PassChange, User
-from login import mail
-from login.mail import send_reset_password_mail
-from django.test import Client
 import uuid
-import unittest
+import pytest
+from unittest import mock
 
 
 class TestChangePassword(StaticLiveServerTestCase):
@@ -71,23 +73,46 @@ class TestChangePassword(StaticLiveServerTestCase):
         response = myclient.get(myurl)
         self.assertEqual(response.status_code, 200)
 
+    @mock.patch(
+        "login.mail.send_reset_password_mail",
+        return_value={"sucess": True},
+    )
     def test_api_response(self, mocker):
-        # mocker.patch(send_reset_password_mail, "function_name", return_value=True)
-        # expected_value = True
-        # assert send_reset_password_mail.function_name() == expected_value
-
-        # return_value = {"sucess": True}
-        # mocker.patch.object(send_reset_password_mail, "method_to_mock")
-        # self.assertEqual(mocker.result(return_value), return_value)
-
-        mocker.patch("mail.send_reset_password_mail", return_value={"success": True})
         expected_value = {"sucess": True}
-        assert mail.send_reset_password_mail() == expected_value
-
-    def test_mail_subject(mocker):
-        mocker.patch(
-            "mail.send_reset_password_mail",
-            return_value="Renouvellement mot de passe Nutella",
+        assert (
+            send_reset_password_mail(
+                email=self.my_user.email, token=self.mytoken, user=self.my_user.username
+            )
+            == expected_value
         )
-        subject = mail.send_reset_password_mail()
-        assert subject != ""
+
+    @mock.patch("login.mail.send_reset_password_mail")
+    def test_mail_subject(self, mocker):
+        assert (
+            send_reset_password_mail(
+                email=self.my_user.email, token=self.mytoken, user=self.my_user.username
+            )
+            != ""
+        )
+
+    def test_setup(self):
+        assert isinstance(self.my_user, User)
+        assert isinstance(self.passchange, PassChange)
+        assert self.mytoken != ""
+
+
+@pytest.mark.django_db
+class TestMail(TestCase):
+    def setUp(self):
+        self.auth = EmailAuth()
+        self.client = Client()
+        self.credentials = {"username": "testuser", "password": "secret"}
+        User = get_user_model()
+        User.objects.create_user(**self.credentials)
+
+    def test_login(self):
+        self.auth.authenticate(self.credentials)
+        # send login data
+        response = self.client.post("/login/", self.credentials, follow=True)
+        # should be logged in now
+        self.assertTrue(response.context["user"].is_authenticated)

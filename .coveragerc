@@ -3,6 +3,7 @@ include =
     ./*
 omit =
     *test/*
+    *.venv/*
     */manage.py
     */urls.py
     */__init__.py

@@ -3,7 +3,7 @@ from sib_api_v3_sdk.rest import ApiException
 
 
 def send_reset_password_mail(email, token, user):
-    print(email, token)
+    # print(email, token)
     configuration = sib_api_v3_sdk.Configuration()
     configuration.api_key[
         "api-key"
