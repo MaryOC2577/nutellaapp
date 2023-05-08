@@ -18,7 +18,7 @@ def send_reset_password_mail(email, token, user):
         f"""<html><body><h1><a href='127.0.0.1:8000/login/password_reset/{token}'>"""
         """Renouveller votre mot de passe.</a></h1><br></body></html>"""
     )
-    to = [{"email": email, "name": "user"}]
+    to = [{"email": email, "name": user}]
     send_smtp_email = sib_api_v3_sdk.SendSmtpEmail(
         to=to,
         html_content=html_content,

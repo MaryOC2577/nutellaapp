@@ -75,25 +75,24 @@ class TestChangePassword(StaticLiveServerTestCase):
 
     @mock.patch(
         "login.mail.send_reset_password_mail",
-        return_value={"sucess": True},
+        return_value={
+            "message_id": "<202305011333.65333901694@smtp-relay.mailin.fr>",
+            "message_ids": None,
+        },
     )
     def test_api_response(self, mocker):
-        expected_value = {"sucess": True}
-        assert (
-            send_reset_password_mail(
-                email=self.my_user.email, token=self.mytoken, user=self.my_user.username
-            )
-            == expected_value
+        assert send_reset_password_mail(
+            email=self.my_user.email, token=self.mytoken, user=self.my_user.username
         )
 
     @mock.patch("login.mail.send_reset_password_mail")
     def test_mail_subject(self, mocker):
-        assert (
-            send_reset_password_mail(
-                email=self.my_user.email, token=self.mytoken, user=self.my_user.username
-            )
-            != ""
-        )
+        assert send_reset_password_mail(
+            email=self.my_user.email, token=self.mytoken, user=self.my_user.username
+        ) != {
+            "message_id": "<202305011333.65333901694@smtp-relay.mailin.fr>",
+            "message_ids": None,
+        }
 
     def test_setup(self):
         assert isinstance(self.my_user, User)
