@@ -20,3 +20,16 @@ class TestExample(TestCase):
         response = self.client.post("/login/", self.credentials, follow=True)
         # should be logged in now
         self.assertTrue(response.context["user"].is_authenticated)
+
+        # Test if user return is get the good email
+        u = self.auth.authenticate(
+            request=None, email="test@test.te", password="secret"
+        )
+        self.assertEquals(u.email, "test@test.te")
+
+        # Test to get the user from id
+        get_u = self.auth.get_user(u.pk)
+        self.assertIsNotNone(get_u)
+
+        # Test if user id doesnt existe => get None
+        self.assertIsNone(self.auth.get_user(123456))
