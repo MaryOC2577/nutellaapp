@@ -26,7 +26,6 @@ def send_reset_password_mail(email, token, user):
     )
     try:
         api_response = api_instance.send_transac_email(send_smtp_email)
-        print(api_response)
         return api_response
     except ApiException as e:
         print("Exception when calling SMTPApi->send_transac_email: %s\n" % e)
