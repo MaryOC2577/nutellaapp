@@ -1,6 +1,8 @@
 import pytest
 from unittest import TestCase
 from django.contrib.auth import get_user_model
+from django.contrib import messages
+from django.urls import reverse
 from django.test import Client
 from login.authenticate import EmailAuth
 
@@ -33,3 +35,9 @@ class TestExample(TestCase):
 
         # Test if user id doesnt existe => get None
         self.assertIsNone(self.auth.get_user(123456))
+
+    def test_logout(self):
+        self.auth.authenticate(self.credentials)
+        self.client.post("/login/", self.credentials, follow=True)
+        self.client.get(reverse("logout"))
+        self.assertEqual(messages.get_messages(), "Vous êtes déconnecté !")
