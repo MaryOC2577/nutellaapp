@@ -1,3 +1,4 @@
+import os
 import sib_api_v3_sdk
 from sib_api_v3_sdk.rest import ApiException
 
@@ -5,9 +6,7 @@ from sib_api_v3_sdk.rest import ApiException
 def send_reset_password_mail(email, token, user):
     # print(email, token)
     configuration = sib_api_v3_sdk.Configuration()
-    configuration.api_key[
-        "api-key"
-    ] = "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"
+    configuration.api_key["api-key"] = os.environ.get("SEND_IN_BLUE_API")
 
     api_instance = sib_api_v3_sdk.TransactionalEmailsApi(
         sib_api_v3_sdk.ApiClient(configuration)
