@@ -12,6 +12,9 @@ db.sqlite3
 #Virutal environnement
 .venv/
 
+#Environnement variables
+.env
+
 # User-specific files
 *.rsuser
 *.suo
